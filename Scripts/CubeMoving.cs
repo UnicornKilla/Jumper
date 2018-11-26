@@ -1,28 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class CubeMoving : MonoBehaviour {
-
-    float horizontal;
+    public Text countText;
+    private int count;
+    float speed;
+    float horizontal;    
     Rigidbody2D rb;
 
-	void Start () {
+	void Start ()
+    {
         rb = GetComponent<Rigidbody2D>();
-	}
+        count = 0;
+        setCount();
+    }
 	
-	void FixedUpdate () {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            horizontal = Input.acceleration.x;
-        }
-        else
-        {
-            horizontal = Input.GetAxis("Horizontal");
-        }
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * 10f, rb.velocity.y);
-		
-	}
+	
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -30,6 +25,24 @@ public class CubeMoving : MonoBehaviour {
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(transform.up * 15f, ForceMode2D.Impulse);
+            
         }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            Destroy(other.gameObject);
+            count++;
+            setCount();
+        }
+        
+    }
+
+    void setCount()
+    {
+        countText.text = count.ToString();
     }
 }
