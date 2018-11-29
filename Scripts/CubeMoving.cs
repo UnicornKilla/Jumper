@@ -24,8 +24,7 @@ public class CubeMoving : MonoBehaviour {
         if (collision.gameObject.tag == "Platform")
         {
             rb.velocity = Vector2.zero;
-            rb.AddForce(transform.up * 15f, ForceMode2D.Impulse);
-            
+            rb.AddForce(transform.up * 15f, ForceMode2D.Impulse);            
         }
         
     }
@@ -39,6 +38,16 @@ public class CubeMoving : MonoBehaviour {
             setCount();
         }
         
+        if (other.gameObject.tag == "Colliders")
+        {
+            SetLose();
+        }
+    }
+
+    void SetLose()
+    {
+        if (PlayerPrefs.GetInt("Score") < count)
+            PlayerPrefs.SetInt("Score", count);
     }
 
     void setCount()

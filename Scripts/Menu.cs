@@ -16,6 +16,27 @@ public class Menu : MonoBehaviour {
 
         switch (gameObject.name)
         {
+            case "HowToPlay":
+                SceneManager.LoadScene(2);
+                break;
+        }
+
+        switch (gameObject.name)
+        {
+            case "Back":
+                SceneManager.LoadScene(0);
+                break;
+        }
+
+        switch (gameObject.name)
+        {
+            case "Shop":
+                SceneManager.LoadScene(3);
+                break;
+        }
+
+        switch (gameObject.name)
+        {
             case "Quit":
                 Application.Quit();
                 break;
