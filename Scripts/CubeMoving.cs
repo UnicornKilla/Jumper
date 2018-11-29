@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class CubeMoving : MonoBehaviour {
+
+    public GameObject pLost;
     public Text countText;
     private int count;
     float speed;
@@ -41,6 +44,7 @@ public class CubeMoving : MonoBehaviour {
         if (other.gameObject.tag == "Colliders")
         {
             SetLose();
+            
         }
     }
 
@@ -48,6 +52,7 @@ public class CubeMoving : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("Score") < count)
             PlayerPrefs.SetInt("Score", count);
+        SceneManager.LoadScene(4);
     }
 
     void setCount()
