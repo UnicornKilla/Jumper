@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CubeMoving : MonoBehaviour {
 
-    public GameObject pLost;
+   
     public Text countText;
     private int count;
     float speed;
@@ -27,7 +27,10 @@ public class CubeMoving : MonoBehaviour {
         if (collision.gameObject.tag == "Platform")
         {
             rb.velocity = Vector2.zero;
-            rb.AddForce(transform.up * 15f, ForceMode2D.Impulse);            
+            rb.AddForce(transform.up * 15f, ForceMode2D.Impulse);
+
+            if (PlayerPrefs.GetString("Sound") != "no")
+                GetComponent<AudioSource>().Play();
         }
         
     }
@@ -39,6 +42,7 @@ public class CubeMoving : MonoBehaviour {
             Destroy(other.gameObject);
             count++;
             setCount();
+            
         }
         
         if (other.gameObject.tag == "Colliders")
